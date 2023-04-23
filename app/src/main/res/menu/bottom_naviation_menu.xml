@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_map"
+        android:title="@string/map"
+        android:icon="@drawable/outline_map_24"/>
+    <item
+        android:id="@+id/action_articles"
+        android:title="@string/article"
+        android:icon="@drawable/outline_newspaper_24"/>
+    <item
+        android:id="@+id/action_profile"
+        android:title="@string/profile"
+        android:icon="@drawable/outline_person_24"/>
+    <item
+        android:id="@+id/action_camera"
+        android:title="Shizophrenia"
+        android:icon="@drawable/outline_camera_alt_24"/>
+</menu>

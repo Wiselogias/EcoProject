@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">EcoProject</string>
+    <string name="map">Map</string>
+    <string name="article">Articles</string>
+    <string name="profile">Profile</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="favorite_articles">Favorite articles</string>
+    <string name="favorite_points">Favorite points</string>
+    <string name="sms_code">SMS Code</string>
+    <string name="verification_code_sent_to_your_phone">Verification code sent to your phone</string>
+    <string name="verify">Verify</string>
+    <string name="resend_password">Resend password</string>
+    <string name="sign_up">Sign up</string>
+    <string name="number">Phone</string>
+    <string name="password">Password</string>
+    <string name="continue_value">Continue</string>
+    <string name="sign_in">Sign in</string>
+    <string name="title">Title</string>
+    <string name="article_text">Article text</string>
+    <string name="publish">Publish</string>
+    <string name="choose_image">Choose image</string>
+    <string name="create_article">Create article</string>
+</resources>
