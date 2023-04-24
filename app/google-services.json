@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "692573713443",
+    "project_id": "ecoproject-c2842",
+    "storage_bucket": "ecoproject-c2842.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:692573713443:android:767da0c413e7864d33ad96",
+        "android_client_info": {
+          "package_name": "com.example.ecoproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "692573713443-8j8t03l5ltfisrskrcd44jb8q8cikg90.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPzK069CgYSkSL6-NfwbQg5nDSOi2zH0M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "692573713443-8j8t03l5ltfisrskrcd44jb8q8cikg90.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

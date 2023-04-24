@@ -5,5 +5,6 @@ import com.example.ecoproject.domain.entities.PointEntity
 interface PointRepo {
     suspend fun createPoint(point: PointEntity): PointEntity
     suspend fun getPoint(id: String): PointEntity
-    suspend fun getPointsWithinRange(lat: Double, lon: Double): List<PointEntity>
+    suspend fun getPointsWithinRange(lat: Double, lon: Double, rad: Double): List<PointEntity>
+    suspend fun invalidate()
 }
