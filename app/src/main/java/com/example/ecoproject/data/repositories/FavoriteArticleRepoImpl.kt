@@ -23,6 +23,12 @@ class FavoriteArticleRepoImpl @Inject constructor(
         favoriteArticleDao.getArticles()
             .map { FavoriteArticleMapper.fromRoomEntityToDomainEntity(it) }
 
+    override suspend fun deleteArticle(id: String): ArticleEntity {
+        val deleted = favoriteArticleDao.getArticle(id)
+        favoriteArticleDao.delete(deleted)
+        return FavoriteArticleMapper.fromRoomEntityToDomainEntity(deleted)
+    }
+
 
     override fun getArticlesPaged(): PagingSource<Int, ArticleEntity> =
         FavoriteArticlePagingSource(favoriteArticleDao)

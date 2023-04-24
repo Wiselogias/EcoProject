@@ -7,5 +7,6 @@ data class ArticleEntity(
     val title: String,
     val text: String,
     val imageReference: String,
-    val time: DateTime
+    val time: DateTime,
+    val author: String
 )

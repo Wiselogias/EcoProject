@@ -15,4 +15,7 @@ data class ArticleFirebaseEntity(
         get() = documentSnapshot.data?.get("imageReference") as String
     val time: Long
         get() = documentSnapshot.data?.get("time") as Long
+
+    val author: String
+        get() = documentSnapshot.data?.get("author") as String
 }

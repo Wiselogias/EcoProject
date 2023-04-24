@@ -12,7 +12,7 @@ import com.example.ecoproject.data.db.entities.FavoritePointRoomEntity
 import com.example.ecoproject.data.db.entities.PointRoomEntity
 
 @Database(
-    version = 1,
+    version = 2,
     entities = [
         ArticleRoomEntity::class,
         FavoriteArticleRoomEntity::class,

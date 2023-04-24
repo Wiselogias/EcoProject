@@ -10,12 +10,16 @@ object ArticleMapper {
         title = articleRoomEntity.title,
         time = articleRoomEntity.time,
         text = articleRoomEntity.text,
-        imageReference = articleRoomEntity.imageReference)
+        imageReference = articleRoomEntity.imageReference,
+        author = articleRoomEntity.author
+    )
 
     fun fromDomainEntityToRoomEntity(articleDomainEntity: ArticleEntity): ArticleRoomEntity = ArticleRoomEntity(
         id = articleDomainEntity.id,
         title = articleDomainEntity.title,
         time = articleDomainEntity.time,
         text = articleDomainEntity.text,
-        imageReference = articleDomainEntity.imageReference)
+        imageReference = articleDomainEntity.imageReference,
+        author = articleDomainEntity.author
+    )
 }

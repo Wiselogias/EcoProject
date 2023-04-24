@@ -19,5 +19,7 @@ data class FavoriteArticleRoomEntity(
     @ColumnInfo
     val imageReference: String,
     @ColumnInfo
-    val time: DateTime
+    val time: DateTime,
+    @ColumnInfo
+    val author: String
 )

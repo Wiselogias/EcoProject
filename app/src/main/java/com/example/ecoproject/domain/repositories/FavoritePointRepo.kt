@@ -7,6 +7,6 @@ interface FavoritePointRepo {
     suspend fun addPoint(point: PointEntity): PointEntity
     suspend fun getPoint(id: String): PointEntity
     suspend fun getPoints(): List<PointEntity>
-
+    suspend fun deletePoint(id: String): PointEntity
     fun getPointsPaged(): PagingSource<Int, PointEntity>
 }

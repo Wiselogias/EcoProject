@@ -21,30 +21,35 @@ class ArticlePagingSource @Inject constructor(
         }
 
 
+    private suspend fun updateLocalDB(stopId: String, limit: Int) {
+        var remote = articleDataSource.getArticlesPaged(limit, null)
+        while (remote.isNotEmpty()) {
+            remote.forEach {
+                if (it.id == stopId) return
+                articleDao.upsert(
+                    ArticleRoomEntity(
+                        it.id,
+                        it.title,
+                        it.text,
+                        it.imageReference,
+                        DateTime(it.time),
+                        it.author
+                    )
+                )
+                remote = articleDataSource.getArticlesPaged(
+                    limit,
+                    remote.last().documentSnapshot
+                )
+            }
+        }
+    }
+
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ArticleEntity> {
         try {
             val page = params.key ?: 1
             if (page == 1) {
-                var local = articleDao.getArticlesPaged(params.loadSize, 0)
-                var remote = articleDataSource.getArticlesPaged(params.loadSize, null)
-                while (local != remote) {
-                    remote.forEach {
-                        articleDao.upsert(
-                            ArticleRoomEntity(
-                                it.id,
-                                it.title,
-                                it.text,
-                                it.imageReference,
-                                DateTime(it.time)
-                            )
-                        )
-                    }
-                    local = articleDao.getArticlesPaged(params.loadSize, 0)
-                    remote = articleDataSource.getArticlesPaged(
-                        params.loadSize,
-                        remote.last().documentSnapshot
-                    )
-                }
+                val local = articleDao.getArticlesPaged(params.loadSize, 0)
+                updateLocalDB(local.firstOrNull()?.id ?: "", params.loadSize)
             }
             val result = articleDao.getArticlesPaged(params.loadSize, params.loadSize * (page - 1))
 

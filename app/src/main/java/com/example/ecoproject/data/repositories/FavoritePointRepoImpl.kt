@@ -22,6 +22,12 @@ class FavoritePointRepoImpl @Inject constructor(
     override suspend fun getPoints(): List<PointEntity> =
         favoritePointDao.getPoints().map { FavoritePointMapper.fromRoomEntityToDomainEntity(it) }
 
+    override suspend fun deletePoint(id: String): PointEntity {
+        val deleted = favoritePointDao.getPoint(id)
+        favoritePointDao.delete(deleted)
+        return FavoritePointMapper.fromRoomEntityToDomainEntity(deleted)
+    }
+
     override fun getPointsPaged(): PagingSource<Int, PointEntity> =
         FavoritePointPagingSource(favoritePointDao)
 }

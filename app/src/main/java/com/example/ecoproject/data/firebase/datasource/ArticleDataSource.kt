@@ -18,7 +18,8 @@ class ArticleDataSource @Inject constructor(
                 "title" to articleEntity.title,
                 "text" to articleEntity.text,
                 "imageReference" to articleEntity.imageReference,
-                "time" to articleEntity.time
+                "time" to articleEntity.time,
+                "author" to articleEntity.author
             )
         ).asCoroutine().get().asCoroutine()
 

@@ -11,6 +11,8 @@ interface AuthRepo {
     suspend fun sendSMS(phone: String)
 
     suspend fun verifyCode(input: String)
+
+    suspend fun signOut()
 }
 
 sealed class AuthState {

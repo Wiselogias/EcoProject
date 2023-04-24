@@ -12,6 +12,7 @@ object ArticleFirebaseMapper {
             title = articleFirebaseEntity.title,
             time = DateTime(articleFirebaseEntity.time),
             text = articleFirebaseEntity.text,
-            imageReference = articleFirebaseEntity.imageReference
+            imageReference = articleFirebaseEntity.imageReference,
+            author = articleFirebaseEntity.author
         )
 }

@@ -59,6 +59,11 @@ class AuthRepoImpl @Inject constructor(
         signWithCredentials(credentials)
     }
 
+    override suspend fun signOut() {
+        auth.signOut()
+        authState.emit(AuthState.NotAuthed)
+    }
+
     private fun signWithCredentials(credentials: PhoneAuthCredential) {
         auth.signInWithCredential(credentials).addOnSuccessListener {
             runBlocking {

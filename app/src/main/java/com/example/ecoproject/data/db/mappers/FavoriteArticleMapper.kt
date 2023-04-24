@@ -10,12 +10,16 @@ object FavoriteArticleMapper {
         title = favoriteArticleRoomEntity.title,
         time = favoriteArticleRoomEntity.time,
         text = favoriteArticleRoomEntity.text,
-        imageReference = favoriteArticleRoomEntity.imageReference)
+        imageReference = favoriteArticleRoomEntity.imageReference,
+        author = favoriteArticleRoomEntity.author
+    )
 
     fun fromDomainEntityToRoomEntity(favoriteArticleDomainEntity: ArticleEntity): FavoriteArticleRoomEntity = FavoriteArticleRoomEntity(
         id = favoriteArticleDomainEntity.id,
         title = favoriteArticleDomainEntity.title,
         time = favoriteArticleDomainEntity.time,
         text = favoriteArticleDomainEntity.text,
-        imageReference = favoriteArticleDomainEntity.imageReference)
+        imageReference = favoriteArticleDomainEntity.imageReference,
+        author = favoriteArticleDomainEntity.author
+    )
 }
