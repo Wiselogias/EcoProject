@@ -1,9 +1,10 @@
 package com.example.ecoproject.data.db.dao
 
-import androidx.paging.PagingSource
+import androidx.room.Dao
 import androidx.room.Query
 import com.example.ecoproject.data.db.entities.PointRoomEntity
 
+@Dao
 abstract class PointDao : CommonDao<PointRoomEntity>() {
 
     @Query("SELECT * FROM points ORDER BY address DESC")

@@ -1,11 +1,15 @@
 package com.example.ecoproject.data.repositories
 
-import androidx.paging.PagingSource
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.map
 import com.example.ecoproject.data.db.dao.FavoritePointDao
 import com.example.ecoproject.data.db.mappers.FavoritePointMapper
-import com.example.ecoproject.data.pagingsource.FavoritePointPagingSource
 import com.example.ecoproject.domain.entities.PointEntity
 import com.example.ecoproject.domain.repositories.FavoritePointRepo
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class FavoritePointRepoImpl @Inject constructor(
@@ -28,6 +32,12 @@ class FavoritePointRepoImpl @Inject constructor(
         return FavoritePointMapper.fromRoomEntityToDomainEntity(deleted)
     }
 
-    override fun getPointsPaged(): PagingSource<Int, PointEntity> =
-        FavoritePointPagingSource(favoritePointDao)
+    override fun getPointsPaged(pagingConfig: PagingConfig): Flow<PagingData<PointEntity>> =
+        Pager(pagingConfig) {
+            favoritePointDao.getPointsPaged()
+        }.flow.map { pagingData ->
+            pagingData.map {
+                FavoritePointMapper.fromRoomEntityToDomainEntity(it)
+            }
+        }
 }

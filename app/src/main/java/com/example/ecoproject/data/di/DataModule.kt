@@ -1,6 +1,7 @@
 package com.example.ecoproject.data.di
 
 import com.example.ecoproject.data.db.di.DatabaseModule
+import com.example.ecoproject.data.firebase.di.FirebaseModule
 import com.example.ecoproject.data.repositories.ArticleRepoImpl
 import com.example.ecoproject.data.repositories.FavoriteArticleRepoImpl
 import com.example.ecoproject.data.repositories.FavoritePointRepoImpl
@@ -14,7 +15,8 @@ import dagger.Module
 
 @Module(
     includes = [
-        DatabaseModule::class
+        DatabaseModule::class,
+        FirebaseModule::class
     ]
 )
 abstract class DataModule {
