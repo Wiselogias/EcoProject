@@ -1,6 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/navigation_main">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_main"
+    app:startDestination="@id/action_profile">
 
+    <fragment
+        android:id="@+id/action_articles"
+        android:name="com.example.ecoproject.ui.articlesfragment.ArticlesFragment"
+        android:label="ArticlesFragment"
+        tools:layout="@layout/articles_fragment">
+        <action
+            android:id="@+id/action_action_articles_to_createArticleFragment"
+            app:destination="@id/createArticleFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/action_camera"
+        android:name="com.example.ecoproject.ui.camerafragment.CameraFragment"
+        android:label="CameraFragment"
+        tools:layout="@layout/camera_fragment" />
+    <fragment
+        android:id="@+id/createArticleFragment"
+        android:name="com.example.ecoproject.ui.createarticlefragment.CreateArticleFragment"
+        android:label="CreateArticleFragment"
+        tools:layout="@layout/create_article_fragment" />
+    <fragment
+        android:id="@+id/favoriteArticlesFragment"
+        android:name="com.example.ecoproject.ui.favoritearticlesfragment.FavoriteArticlesFragment"
+        android:label="FavoriteArticlesFragment"
+        tools:layout="@layout/articles_fragment" />
+    <fragment
+        android:id="@+id/favoritePointsFragment"
+        android:name="com.example.ecoproject.ui.favoritepointsfragment.FavoritePointsFragment"
+        android:label="FavoritePointsFragment"
+        tools:layout="@layout/articles_fragment" />
+    <fragment
+        android:id="@+id/action_map"
+        android:name="com.example.ecoproject.ui.mapfragment.MapFragment"
+        android:label="MapFragment"
+        tools:layout="@layout/map_fragment" />
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.example.ecoproject.ui.auth.signupfragment.SignUpFragment"
+        android:label="SignUpFragment"
+        tools:layout="@layout/sign_up_fragment">
+        <action
+            android:id="@+id/action_signUpFragment_to_verificationFragment"
+            app:destination="@id/verificationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/action_profile"
+        android:name="com.example.ecoproject.ui.profilefragment.ProfileFragment"
+        android:label="ProfileFragment"
+        tools:layout="@layout/profile_fragment">
+        <action
+            android:id="@+id/action_action_profile_to_favoritePointsFragment"
+            app:destination="@id/favoritePointsFragment" />
+        <action
+            android:id="@+id/action_action_profile_to_favoriteArticlesFragment"
+            app:destination="@id/favoriteArticlesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/verificationFragment"
+        android:name="com.example.ecoproject.ui.auth.verificationfragment.VerificationFragment"
+        android:label="VerificationFragment"
+        tools:layout="@layout/verification_fragment" />
 </navigation>

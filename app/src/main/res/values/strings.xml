@@ -21,4 +21,5 @@
     <string name="choose_image">Choose image</string>
     <string name="create_article">Create article</string>
     <string name="mapbox_access_token" translatable="false">sk.eyJ1IjoiYXJ0ZXJrcmlsb2siLCJhIjoiY2wxMHhvajlqMmhsODNibm1zYTI3cnp5YyJ9.FQhI6OigNDlgg4vL5-KlIA</string>
+    <string name="something_went_wrong">Something went wrong</string>
 </resources>

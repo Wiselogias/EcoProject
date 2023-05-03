@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class AddFavoritePoint @Inject constructor(
+class AddFavoritePointUseCase @Inject constructor(
     private val favoritePointRepo: FavoritePointRepo,
     private val pointRepo: FavoritePointRepo
 ) : UseCase<AddFavoriteParams, PointEntity> {

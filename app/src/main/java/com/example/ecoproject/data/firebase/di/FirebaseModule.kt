@@ -1,6 +1,8 @@
 package com.example.ecoproject.data.firebase.di
 
 import com.example.ecoproject.data.di.DataScope
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -21,4 +23,8 @@ class FirebaseModule {
     @DataScope
     fun providePointCollectionReference(): CollectionReference =
         Firebase.firestore.collection("points")
+
+    @Provides
+    @DataScope
+    fun provideFirebaseAuth(): FirebaseAuth = Firebase.auth
 }
