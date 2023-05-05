@@ -3,7 +3,7 @@ package com.example.ecoproject.ui.main
 import android.os.Bundle
 import androidx.core.view.isVisible
 import androidx.navigation.NavOptions
-import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.ecoproject.R
 import com.example.ecoproject.common.mvvm.BaseActivity
@@ -18,6 +18,7 @@ class MainActivity : BaseActivity() {
 
     @Inject
     lateinit var viewModel: MainActivityViewModel
+    private lateinit var binding: ActivityMainBinding
 
     val activityComponent: MainActivityComponent by lazy {
         DaggerMainActivityComponent.builder().dataComponent(component).build()
@@ -25,10 +26,15 @@ class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         activityComponent.inject(this)
-        val navigation = Navigation.findNavController(this, R.id.nav_host_fragment).also {
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        val navigation = binding.navHostFragment.findNavController().also {
             binding.navBar.setupWithNavController(it)
         }
         viewModel.authState.collectOnLifeCycle(this) {
