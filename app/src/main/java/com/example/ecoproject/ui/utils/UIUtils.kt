@@ -2,11 +2,15 @@ package com.example.ecoproject.ui.utils
 
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.Gravity
 import android.widget.EditText
+import android.widget.FrameLayout
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.NavController
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
@@ -22,6 +26,19 @@ object UIUtils {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.CREATED, block)
         }
+    }
+
+    fun NavController.destinationFlow() = callbackFlow {
+        val listener = NavController.OnDestinationChangedListener { _, destination, _ ->
+            runBlocking { send(destination) }
+        }
+        addOnDestinationChangedListener(listener)
+        awaitClose { removeOnDestinationChangedListener(listener) }
+    }
+    fun Snackbar.top(): Snackbar = apply {
+        val params = view.layoutParams as FrameLayout.LayoutParams
+        params.gravity = Gravity.TOP
+        view.layoutParams = params
     }
 
     fun <T> Flow<T>.collectOnLifeCycle(

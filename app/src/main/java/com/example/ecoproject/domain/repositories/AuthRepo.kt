@@ -1,5 +1,6 @@
 package com.example.ecoproject.domain.repositories
 
+import android.app.Activity
 import com.example.ecoproject.domain.entities.UserEntity
 import kotlinx.coroutines.flow.Flow
 
@@ -8,7 +9,7 @@ interface AuthRepo {
 
     fun verificationStateFlow(): Flow<VerificationState>
 
-    suspend fun sendSMS(phone: String)
+    suspend fun sendSMS(phone: String, activity: Activity)
 
     suspend fun verifyCode(input: String)
 

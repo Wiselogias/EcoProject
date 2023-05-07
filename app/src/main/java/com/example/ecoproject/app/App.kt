@@ -14,4 +14,8 @@ class App : Application() {
     val dataComponent: DataComponent by lazy {
         DaggerDataComponent.builder().appComponent(appComponent).build()
     }
+
+    override fun onCreate() {
+        super.onCreate()
+    }
 }

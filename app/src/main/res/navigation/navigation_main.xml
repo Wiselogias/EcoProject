@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_main"
-    app:startDestination="@id/action_profile">
+    app:startDestination="@id/signUpFragment">
 
     <fragment
         android:id="@+id/action_articles"
@@ -13,6 +13,12 @@
         <action
             android:id="@+id/action_action_articles_to_createArticleFragment"
             app:destination="@id/createArticleFragment" />
+        <action
+            android:id="@+id/action_action_articles_to_articleFragment"
+            app:destination="@id/articleFragment" />
+        <action
+            android:id="@+id/action_action_articles_to_createArticleActivity"
+            app:destination="@id/createArticleActivity" />
     </fragment>
     <fragment
         android:id="@+id/action_camera"
@@ -28,17 +34,29 @@
         android:id="@+id/favoriteArticlesFragment"
         android:name="com.example.ecoproject.ui.favoritearticlesfragment.FavoriteArticlesFragment"
         android:label="FavoriteArticlesFragment"
-        tools:layout="@layout/articles_fragment" />
+        tools:layout="@layout/articles_fragment" >
+        <action
+            android:id="@+id/action_favoriteArticlesFragment_to_articleFragment"
+            app:destination="@id/articleFragment" />
+    </fragment>
     <fragment
         android:id="@+id/favoritePointsFragment"
         android:name="com.example.ecoproject.ui.favoritepointsfragment.FavoritePointsFragment"
         android:label="FavoritePointsFragment"
-        tools:layout="@layout/articles_fragment" />
+        tools:layout="@layout/articles_fragment" >
+        <action
+            android:id="@+id/action_favoritePointsFragment_to_pointFragment"
+            app:destination="@id/pointFragment" />
+    </fragment>
     <fragment
         android:id="@+id/action_map"
         android:name="com.example.ecoproject.ui.mapfragment.MapFragment"
         android:label="MapFragment"
-        tools:layout="@layout/map_fragment" />
+        tools:layout="@layout/map_fragment" >
+        <action
+            android:id="@+id/action_action_map_to_pointFragment"
+            app:destination="@id/pointFragment" />
+    </fragment>
     <fragment
         android:id="@+id/signUpFragment"
         android:name="com.example.ecoproject.ui.auth.signupfragment.SignUpFragment"
@@ -65,4 +83,19 @@
         android:name="com.example.ecoproject.ui.auth.verificationfragment.VerificationFragment"
         android:label="VerificationFragment"
         tools:layout="@layout/verification_fragment" />
+    <fragment
+        android:id="@+id/articleFragment"
+        tools:layout="@layout/article_fragment"
+        android:name="com.example.ecoproject.ui.article.ArticleFragment"
+        android:label="ArticleFragment" />
+    <dialog
+        android:id="@+id/pointFragment"
+        android:name="com.example.ecoproject.ui.point.PointFragment"
+        tools:layout="@layout/point_fragment"
+        android:label="PointFragment" />
+    <activity
+        android:id="@+id/createArticleActivity"
+        tools:layout="@layout/create_article_fragment"
+        android:name="com.example.ecoproject.ui.createarticlefragment.CreateArticleActivity"
+        android:label="CreateArticleActivity" />
 </navigation>

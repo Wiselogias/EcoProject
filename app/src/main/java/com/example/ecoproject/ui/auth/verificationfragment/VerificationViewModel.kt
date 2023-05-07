@@ -10,11 +10,10 @@ import kotlinx.coroutines.flow.take
 import javax.inject.Inject
 
 class VerificationViewModel @Inject constructor(
-    private val verifyCodeUseCase: VerifyCodeUseCase
+    private val verifyCodeUseCase: VerifyCodeUseCase,
 ) : BaseViewModel() {
     val code = MutableStateFlow("")
     val isCode = code.map { it.length > 4 }.shareWhileSubscribed()
-
 
     fun validateCode() = code.take(1).flatMapConcat { verifyCodeUseCase(VerifyCodeParams(it)) }
 }

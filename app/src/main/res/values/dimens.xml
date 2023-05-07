@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="progress_dialog_padding">24dp</dimen>
+    <dimen name="progress_dialog_radius">12dp</dimen>
+    <dimen name="article_image">150dp</dimen>
+</resources>

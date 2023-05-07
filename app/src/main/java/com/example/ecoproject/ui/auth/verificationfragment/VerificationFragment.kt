@@ -28,7 +28,7 @@ class VerificationFragment : BaseFragment<MainActivity>() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        baseActivity.activityComponent.verificationSubcomponent().inject(this)
+        baseActivity.activityComponent.verificationSubcomponent.inject(this)
     }
 
     override fun onCreateView(
@@ -55,15 +55,17 @@ class VerificationFragment : BaseFragment<MainActivity>() {
         }
 
         binding.verifyButton.setOnClickListener {
+            showProgress()
             viewModel.validateCode().collectIn(lifecycleScope) {
-                if (it is VerifyCodeResult.Error)
+                if (it is VerifyCodeResult.Error) {
+                    hideProgress()
                     Snackbar.make(
                         binding.root,
                         it.t.localizedMessage ?: it.t.message
                         ?: getString(R.string.something_went_wrong),
                         Snackbar.LENGTH_LONG
                     ).show()
-
+                }
             }
         }
     }

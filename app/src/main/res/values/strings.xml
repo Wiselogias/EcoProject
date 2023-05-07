@@ -22,4 +22,15 @@
     <string name="create_article">Create article</string>
     <string name="mapbox_access_token" translatable="false">sk.eyJ1IjoiYXJ0ZXJrcmlsb2siLCJhIjoiY2wxMHhvajlqMmhsODNibm1zYTI3cnp5YyJ9.FQhI6OigNDlgg4vL5-KlIA</string>
     <string name="something_went_wrong">Something went wrong</string>
+    <string name="no_articles">No articles</string>
+    <string name="article_image">Article image</string>
+    <string name="add_to_favorite">Add to favorite</string>
+    <string name="remove_from_favorite">Remove from favorite</string>
+    <string name="added_to_favorite">Added to favorite</string>
+    <string name="removed_from_favorite">Removed from favorite</string>
+    <string name="image_upload_success">Image uploaded</string>
+    <string name="permissionsAlertTitle">Not all permissions granted</string>
+    <string name="permissionsText">To use this app you need to grant permissions.</string>
+    <string name="pick_up_place">Pick up place</string>
+    <string name="no_points">No points</string>
 </resources>

@@ -6,6 +6,8 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.StorageReference
+import com.google.firebase.storage.ktx.storage
 import dagger.Module
 import dagger.Provides
 import javax.inject.Named
@@ -27,4 +29,8 @@ class FirebaseModule {
     @Provides
     @DataScope
     fun provideFirebaseAuth(): FirebaseAuth = Firebase.auth
+
+    @Provides
+    @DataScope
+    fun provideImagesRef(): StorageReference = Firebase.storage.getReference("articles")
 }

@@ -18,7 +18,7 @@ class CameraFragment : BaseFragment<MainActivity>() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        baseActivity.activityComponent.cameraSubcomponent().inject(this)
+        baseActivity.activityComponent.cameraSubcomponent.inject(this)
     }
 
     override fun onCreateView(

@@ -1,11 +1,13 @@
 package com.example.ecoproject.data.repositories
 
+import android.app.Activity
 import com.example.ecoproject.domain.entities.UserEntity
 import com.example.ecoproject.domain.repositories.AuthRepo
 import com.example.ecoproject.domain.repositories.AuthState
 import com.example.ecoproject.domain.repositories.VerificationState
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
@@ -19,14 +21,17 @@ import javax.inject.Inject
 class AuthRepoImpl @Inject constructor(
     private val auth: FirebaseAuth
 ) : AuthRepo {
-    private val authState = MutableStateFlow<AuthState>(AuthState.NotAuthed)
+    private val authState = MutableStateFlow(
+        if(auth.currentUser == null) AuthState.NotAuthed
+        else AuthState.Authed(auth.currentUser!!.toUserEntity())
+    )
     private val verificationState = MutableStateFlow<VerificationState>(VerificationState.NotSent)
 
     override fun authStateFlow(): Flow<AuthState> = authState
 
     override fun verificationStateFlow(): Flow<VerificationState> = verificationState
 
-    override suspend fun sendSMS(phone: String) {
+    override suspend fun sendSMS(phone: String, activity: Activity) {
         val callback = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
             override fun onVerificationCompleted(p0: PhoneAuthCredential) {
                 signWithCredentials(p0)
@@ -47,6 +52,7 @@ class AuthRepoImpl @Inject constructor(
             .setPhoneNumber(phone)
             .setTimeout(60L, TimeUnit.SECONDS)
             .setCallbacks(callback)
+            .setActivity(activity)
             .build()
         PhoneAuthProvider.verifyPhoneNumber(options)
     }
@@ -76,4 +82,6 @@ class AuthRepoImpl @Inject constructor(
         }
     }
 
+    fun FirebaseUser.toUserEntity() =
+        UserEntity(uid, phoneNumber ?: "")
 }

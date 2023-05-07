@@ -6,10 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import com.example.ecoproject.R
 import com.example.ecoproject.common.mvvm.BaseFragment
 import com.example.ecoproject.databinding.SignUpFragmentBinding
 import com.example.ecoproject.domain.repositories.VerificationState
 import com.example.ecoproject.ui.main.MainActivity
+import com.example.ecoproject.ui.utils.UIUtils.collectIn
 import com.example.ecoproject.ui.utils.UIUtils.collectOnLifeCycle
 import com.example.ecoproject.ui.utils.UIUtils.onTextChanged
 import com.example.ecoproject.ui.utils.UIUtils.replaceText
@@ -23,7 +27,7 @@ class SignUpFragment : BaseFragment<MainActivity>() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        baseActivity.activityComponent.signUpSubcomponent().inject(this)
+        baseActivity.activityComponent.signUpSubcomponent.inject(this)
     }
 
     override fun onCreateView(
@@ -50,12 +54,16 @@ class SignUpFragment : BaseFragment<MainActivity>() {
         }
 
         binding.verifyButton.setOnClickListener {
-            viewModel.sendSMS()
+            showProgress()
+            viewModel.sendSMS(baseActivity).collectIn(lifecycleScope) {
+                hideProgress()
+            }
         }
 
         viewModel.verificationState.collectOnLifeCycle(this) {
             if (it is VerificationState.Sent) {
-                TODO("GO TO VERIFICATION FRAGMENT")
+                hideProgress()
+                findNavController().navigate(R.id.action_signUpFragment_to_verificationFragment)
             }
         }
     }

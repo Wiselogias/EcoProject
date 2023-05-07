@@ -5,6 +5,7 @@ import com.example.ecoproject.domain.repositories.ArticleRepo
 import com.example.ecoproject.domain.repositories.AuthRepo
 import com.example.ecoproject.domain.repositories.FavoriteArticleRepo
 import com.example.ecoproject.domain.repositories.FavoritePointRepo
+import com.example.ecoproject.domain.repositories.ImageRepo
 import com.example.ecoproject.domain.repositories.PointRepo
 import dagger.Component
 
@@ -24,4 +25,5 @@ interface DataComponent {
     val pointRepo: PointRepo
     val favoritePointRepo: FavoritePointRepo
     val authRepo: AuthRepo
+    val imageRepo: ImageRepo
 }

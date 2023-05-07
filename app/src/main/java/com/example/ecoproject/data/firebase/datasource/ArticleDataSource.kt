@@ -12,26 +12,39 @@ import javax.inject.Named
 class ArticleDataSource @Inject constructor(
     @Named("articlesCollectionReference") private val collection: CollectionReference
 ) {
-    suspend fun saveArticle(articleEntity: ArticleEntity): ArticleFirebaseEntity {
-        val snapshot = collection.add(
+    suspend fun saveArticle(articleEntity: ArticleEntity): ArticleEntity {
+        val ref = collection.add(
             hashMapOf(
                 "title" to articleEntity.title,
                 "text" to articleEntity.text,
                 "imageReference" to articleEntity.imageReference,
-                "time" to articleEntity.time,
+                "time" to articleEntity.time.millis,
                 "author" to articleEntity.author
             )
-        ).asCoroutine().get().asCoroutine()
+        ).asCoroutine()
 
-        return ArticleFirebaseEntity(snapshot)
+        return ArticleEntity(
+            ref.id,
+            articleEntity.title,
+            articleEntity.text,
+            articleEntity.imageReference,
+            articleEntity.time,
+            articleEntity.author
+        )
     }
 
     suspend fun getArticlesPaged(
         limit: Int, snapshot: DocumentSnapshot?
     ): List<ArticleFirebaseEntity> =
-        collection.orderBy("time", Query.Direction.DESCENDING).startAfter(snapshot)
+        if (snapshot != null) collection.orderBy("time", Query.Direction.DESCENDING)
+            .startAfter(snapshot)
             .limit(limit.toLong())
             .get().asCoroutine().map {
                 ArticleFirebaseEntity(it)
-            }
+            }.filterNotNull()
+        else collection.orderBy("time", Query.Direction.DESCENDING)
+            .limit(limit.toLong())
+            .get().asCoroutine().map {
+                ArticleFirebaseEntity(it)
+            }.filterNotNull()
 }

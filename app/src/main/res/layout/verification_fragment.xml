@@ -2,6 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="16dp">
 
     <TextView
@@ -22,12 +23,15 @@
             android:id="@+id/code_text_input_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:counterMaxLength="6"
+            app:counterEnabled="true"
             android:hint="@string/sms_code">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/text_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:maxLength="6"
                 android:inputType="numberDecimal" />
         </com.google.android.material.textfield.TextInputLayout>
 
