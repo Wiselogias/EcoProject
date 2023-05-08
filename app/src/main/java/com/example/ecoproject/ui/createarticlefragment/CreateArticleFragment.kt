@@ -1,11 +1,14 @@
 package com.example.ecoproject.ui.createarticlefragment
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -29,9 +32,20 @@ class CreateArticleFragment : BaseFragment<MainActivity>() {
     lateinit var viewModel: CreateArticleViewModel
     private lateinit var binding: CreateArticleFragmentBinding
 
+    private val activityResultLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result != null && result.resultCode == Activity.RESULT_OK) {
+                result.data?.data?.let {
+                    openUri(it)
+                }
+            }
+        }
+
     private fun openUri(uri: Uri) {
+        showProgress()
         viewModel.uploadFile(requireContext().contentResolver.openInputStream(uri))
             .collectIn(lifecycleScope) {
+                hideProgress()
                 when (it) {
                     is ImageUploadResult.Success -> {
                         Snackbar.make(
@@ -82,8 +96,10 @@ class CreateArticleFragment : BaseFragment<MainActivity>() {
 
         binding.publishButton.setOnClickListener {
             binding.publishButton.isEnabled = false
+            showProgress()
             viewModel.createArticle().collectIn(lifecycleScope) {
                 binding.publishButton.isEnabled = true
+                hideProgress()
                 when (it) {
                     is CreateArticleResult.Success -> findNavController().popBackStack()
 
@@ -98,7 +114,10 @@ class CreateArticleFragment : BaseFragment<MainActivity>() {
         }
 
         binding.chooseImage.setOnClickListener {
-
+            activityResultLauncher.launch(Intent.createChooser(Intent().apply {
+                type = "image/*"
+                action = Intent.ACTION_GET_CONTENT
+            }, getString(R.string.choose_image)))
         }
     }
 }

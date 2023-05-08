@@ -7,6 +7,9 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
 
+    <uses-feature android:name="android.hardware.camera" />
+
+
     <application
         android:name=".app.App"
         android:allowBackup="true"
@@ -17,6 +20,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:targetApi="31">
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.ecoproject.fileprovider"
+            android:grantUriPermissions="true"
+            android:exported="false">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/filepaths" />
+        </provider>
+
         <activity
             android:name=".ui.createarticlefragment.CreateArticleActivity"
             android:exported="false" />

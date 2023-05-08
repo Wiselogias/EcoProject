@@ -58,6 +58,7 @@ class VerificationFragment : BaseFragment<MainActivity>() {
             showProgress()
             viewModel.validateCode().collectIn(lifecycleScope) {
                 if (it is VerifyCodeResult.Error) {
+                    it.t.printStackTrace()
                     hideProgress()
                     Snackbar.make(
                         binding.root,

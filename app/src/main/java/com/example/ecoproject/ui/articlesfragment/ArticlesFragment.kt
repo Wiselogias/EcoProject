@@ -36,7 +36,7 @@ class ArticlesFragment : BaseFragment<MainActivity>() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        baseActivity.activityComponent.articlesSubcomponent.inject(this)
+        baseActivity.activityComponent.inject(this)
     }
 
     override fun onCreateView(
@@ -75,7 +75,7 @@ class ArticlesFragment : BaseFragment<MainActivity>() {
         }
 
         binding.floatingActionButton.setOnClickListener {
-            findNavController().navigate(R.id.action_action_articles_to_createArticleActivity)
+            findNavController().navigate(R.id.action_action_articles_to_createArticleFragment)
         }
     }
 }

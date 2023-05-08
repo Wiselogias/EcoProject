@@ -5,4 +5,6 @@ import java.io.InputStream
 
 interface ImageRepo {
     suspend fun upload(inputStream: InputStream): Pair<Bitmap, String>
+
+    suspend fun bitmap(inputStream: InputStream): Bitmap
 }

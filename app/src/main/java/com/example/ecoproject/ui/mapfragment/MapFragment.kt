@@ -64,7 +64,7 @@ class MapFragment : BaseFragment<MainActivity>() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        baseActivity.activityComponent.mapSubcomponent.inject(this)
+        baseActivity.activityComponent.inject(this)
     }
 
     override fun onCreateView(

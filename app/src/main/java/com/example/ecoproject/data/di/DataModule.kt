@@ -2,12 +2,15 @@ package com.example.ecoproject.data.di
 
 import com.example.ecoproject.data.db.di.DatabaseModule
 import com.example.ecoproject.data.firebase.di.FirebaseModule
+import com.example.ecoproject.data.remote.di.RemoteModule
 import com.example.ecoproject.data.repositories.ArticleRepoImpl
 import com.example.ecoproject.data.repositories.AuthRepoImpl
 import com.example.ecoproject.data.repositories.FavoriteArticleRepoImpl
 import com.example.ecoproject.data.repositories.FavoritePointRepoImpl
 import com.example.ecoproject.data.repositories.ImageRepoImpl
 import com.example.ecoproject.data.repositories.PointRepoImpl
+import com.example.ecoproject.data.repositories.TestAnalyseRepoImpl
+import com.example.ecoproject.domain.repositories.AnalyseRepo
 import com.example.ecoproject.domain.repositories.ArticleRepo
 import com.example.ecoproject.domain.repositories.AuthRepo
 import com.example.ecoproject.domain.repositories.FavoriteArticleRepo
@@ -20,7 +23,8 @@ import dagger.Module
 @Module(
     includes = [
         DatabaseModule::class,
-        FirebaseModule::class
+        FirebaseModule::class,
+        RemoteModule::class,
     ]
 )
 abstract class DataModule {
@@ -47,4 +51,8 @@ abstract class DataModule {
     @Binds
     @DataScope
     abstract fun bindImageRepo(imageRepoImpl: ImageRepoImpl): ImageRepo
+
+    @Binds
+    @DataScope
+    abstract fun bindAnalyseRepo(analyseRepoImpl: TestAnalyseRepoImpl): AnalyseRepo
 }

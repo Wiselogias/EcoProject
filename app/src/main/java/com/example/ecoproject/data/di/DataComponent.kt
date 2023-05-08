@@ -1,6 +1,7 @@
 package com.example.ecoproject.data.di
 
 import com.example.ecoproject.app.di.AppComponent
+import com.example.ecoproject.domain.repositories.AnalyseRepo
 import com.example.ecoproject.domain.repositories.ArticleRepo
 import com.example.ecoproject.domain.repositories.AuthRepo
 import com.example.ecoproject.domain.repositories.FavoriteArticleRepo
@@ -26,4 +27,5 @@ interface DataComponent {
     val favoritePointRepo: FavoritePointRepo
     val authRepo: AuthRepo
     val imageRepo: ImageRepo
+    val analyseRepo: AnalyseRepo
 }

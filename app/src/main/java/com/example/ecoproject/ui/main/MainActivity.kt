@@ -18,7 +18,6 @@ import com.google.android.material.snackbar.Snackbar
 import javax.inject.Inject
 
 class MainActivity : BaseActivity() {
-
     @Inject
     lateinit var viewModel: MainActivityViewModel
     private lateinit var binding: ActivityMainBinding
@@ -35,9 +34,7 @@ class MainActivity : BaseActivity() {
         binding.navBar.selectedItemId = R.id.action_map
     }
 
-    override fun onResume() {
-        super.onResume()
-
+    override fun onceOnResume() {
         val navigation = binding.navHostFragment.findNavController().also {
             binding.navBar.setupWithNavController(it)
         }
@@ -54,16 +51,19 @@ class MainActivity : BaseActivity() {
         viewModel.authState.collectOnLifeCycle(this) {
             when (it) {
                 is AuthState.NotAuthed -> navigation.navigate(
-                    R.id.signUpFragment, null, NavOptions.Builder().setLaunchSingleTop(true).build()
+                    R.id.signUpFragment,
+                    null,
+                    NavOptions.Builder().setLaunchSingleTop(true).build()
                 )
 
                 is AuthState.Authed -> navigation.navigate(
-                    R.id.action_articles,
+                    R.id.action_camera,
                     null,
                     NavOptions.Builder().setLaunchSingleTop(true).build()
                 )
 
                 is AuthState.Error -> {
+                    it.t.printStackTrace()
                     Snackbar.make(
                         binding.root,
                         it.t.localizedMessage ?: it.t.message

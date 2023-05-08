@@ -2,8 +2,6 @@ package com.example.ecoproject.common.mvvm
 
 import android.Manifest
 import android.content.pm.PackageManager
-import android.net.Uri
-import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -13,27 +11,10 @@ import com.example.ecoproject.app.App
 import com.example.ecoproject.data.di.DataComponent
 
 open class BaseActivity : AppCompatActivity() {
-
-    private val filePickerLauncher = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
-        canBack = true
-        filePickerListener(uri)
-        filePickerListener = { }
-    }
-
-
-    private var filePickerListener: (Uri?) -> Unit = { }
-    fun chooseImage(listener: (Uri?) -> Unit) {
-        filePickerListener = listener
-        canBack = false
-        filePickerLauncher.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
-    }
-
-    private var canBack: Boolean = true
-
-
     val app: App by lazy {
         application as App
     }
+    private var once: Boolean = false
 
     val component: DataComponent by lazy {
         app.dataComponent
@@ -51,6 +32,10 @@ open class BaseActivity : AppCompatActivity() {
         super.onResume()
 
         checkPermissions()
+        if (!once) {
+            onceOnResume()
+            once = true
+        }
     }
     private fun checkPermissions() {
         appPermissions.map {
@@ -76,9 +61,6 @@ open class BaseActivity : AppCompatActivity() {
         requestPermissionLauncher.launch(permissions.toTypedArray())
     }
 
-
-    override fun onBackPressed() {
-        if (canBack) super.onBackPressed()
-    }
+    open fun onceOnResume() {}
 
 }

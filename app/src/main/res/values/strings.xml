@@ -33,4 +33,12 @@
     <string name="permissionsText">To use this app you need to grant permissions.</string>
     <string name="pick_up_place">Pick up place</string>
     <string name="no_points">No points</string>
+    <string name="take_photo">Take photo</string>
+    <string name="analyse">Analyse</string>
+    <string name="photo_preview">Photo preview</string>
+    <string name="no_photo">No photo</string>
+    <string name="image_not_taken">Image not taken</string>
+    <string name="take_photo_to_use_this_feature">You need to take photo to use this feature</string>
+    <string name="analyse_response_title">Analyse result</string>
+    <string name="analyse_reponse_message">Garbage type: %1$s</string>
 </resources>
